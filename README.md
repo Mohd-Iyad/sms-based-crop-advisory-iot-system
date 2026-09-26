@@ -1,3 +1,4 @@
+[![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
 # Crop Advisory IoT System
 
 An IoT-based crop advisory platform that combines field sensing, rule-based agricultural decision logic, weather data, market information, and SMS delivery to provide actionable crop advisories.
