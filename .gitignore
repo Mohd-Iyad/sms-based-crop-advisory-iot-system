@@ -1,0 +1,24 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.claude/
+
+# Local SQLite database (persistent device/reading/alert/delivery state) -- never shared, never committed.
+crop_advisory.db
+crop_advisory.db-*
+*.db
+*.db-*
+
+# Real hardware config contains the Wi-Fi password + device key -- never commit it.
+# Only config.example.h (with placeholder values) should be tracked.
+# (The sketch lives in hardware/crop_advisory_node/, so THAT is the file that holds the real secrets.)
+hardware/config.h
+hardware/crop_advisory_node/config.h
+
+# Other local files that must never be committed
+.env.*
+!.env.example
+pytest-cache-files-*/
+config.h

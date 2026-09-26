@@ -1,0 +1,80 @@
+<svg viewBox="0 0 900 1080" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1a3c34"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="1080" fill="#ffffff"/>
+  <text x="450" y="32" text-anchor="middle" font-size="19" font-weight="bold" fill="#1a3c34">ESP32 Firmware Flow Diagram (v2)</text>
+  <text x="450" y="50" text-anchor="middle" font-size="10.5" fill="#666">This diagram matches crop_advisory_node.ino exactly — no NTP, no fabricated sensor values</text>
+
+  <ellipse cx="450" cy="90" rx="90" ry="28" fill="#1a3c34"/>
+  <text x="450" y="96" text-anchor="middle" font-size="12.5" fill="#ffffff" font-weight="bold">Power On / Reset</text>
+
+  <rect x="330" y="145" width="240" height="55" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="168" text-anchor="middle" font-size="12" fill="#1a3c34">Connect to Wi-Fi</text>
+  <text x="450" y="185" text-anchor="middle" font-size="10" fill="#555">up to 30 attempts @ 500ms (~15 sec total)</text>
+
+  <rect x="300" y="235" width="300" height="85" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="260" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a3c34">Read Sensors</text>
+  <text x="450" y="279" text-anchor="middle" font-size="10.5" fill="#333">DHT22 → temperature, humidity (or FAULT)</text>
+  <text x="450" y="296" text-anchor="middle" font-size="10.5" fill="#333">Soil sensor → 16-sample averaged moisture index</text>
+  <text x="450" y="312" text-anchor="middle" font-size="10.5" fill="#333">FC-37 → rain detected (now transmitted)</text>
+
+  <polygon points="450,350 570,400 450,450 330,400" fill="#f5f9f8" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="396" text-anchor="middle" font-size="11.5" fill="#1a3c34">DHT22 read OK?</text>
+  <text x="450" y="413" text-anchor="middle" font-size="9.5" fill="#555">(isnan check)</text>
+
+  <rect x="620" y="368" width="200" height="65" rx="8" fill="#fdeceb" stroke="#b3413a" stroke-width="1.5"/>
+  <text x="720" y="393" text-anchor="middle" font-size="11" font-weight="bold" fill="#7a1f18">Omit temp/humidity</text>
+  <text x="720" y="410" text-anchor="middle" font-size="9.5" fill="#7a1f18">from payload entirely</text>
+  <text x="720" y="425" text-anchor="middle" font-size="9" fill="#7a1f18">(null → honest fault, not a fake number)</text>
+
+  <rect x="330" y="480" width="240" height="55" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="503" text-anchor="middle" font-size="12" fill="#1a3c34">Build JSON payload</text>
+  <text x="450" y="520" text-anchor="middle" font-size="10" fill="#555">device_id, sequence, moisture, rain, [temp, humidity]</text>
+
+  <rect x="330" y="570" width="240" height="60" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="595" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a3c34">HTTPS POST /sensor-data</text>
+  <text x="450" y="612" text-anchor="middle" font-size="10" fill="#555">with X-Device-Key header</text>
+
+  <polygon points="450,655 560,705 450,755 340,705" fill="#f5f9f8" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="701" text-anchor="middle" font-size="11.5" fill="#1a3c34">Response 200?</text>
+
+  <rect x="620" y="675" width="200" height="60" rx="8" fill="#fdeceb" stroke="#b3413a" stroke-width="1.5"/>
+  <text x="720" y="700" text-anchor="middle" font-size="11" fill="#7a1f18">Log error to Serial</text>
+  <text x="720" y="717" text-anchor="middle" font-size="9.5" fill="#7a1f18">no caching — next cycle sends a fresh reading</text>
+
+  <rect x="330" y="790" width="240" height="55" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="813" text-anchor="middle" font-size="12" fill="#1a3c34">Increment sequence number</text>
+  <text x="450" y="830" text-anchor="middle" font-size="10" fill="#555">so backend can detect retries/duplicates</text>
+
+  <rect x="330" y="880" width="240" height="55" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="450" y="903" text-anchor="middle" font-size="12" fill="#1a3c34">Wait interval (e.g. 5 min)</text>
+  <text x="450" y="920" text-anchor="middle" font-size="10" fill="#555">then loop back to Read Sensors</text>
+
+  <line x1="450" y1="118" x2="450" y2="140" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="200" x2="450" y2="230" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="320" x2="450" y2="345" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="450" x2="450" y2="475" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="475" y="467" font-size="10" fill="#1a6b3c">Yes</text>
+  <line x1="570" y1="400" x2="618" y2="398" stroke="#b3413a" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="590" y="392" font-size="10" fill="#b3413a">No</text>
+  <path d="M720,433 L720,507 L575,507" fill="none" stroke="#b3413a" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="535" x2="450" y2="565" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="630" x2="450" y2="650" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="755" x2="450" y2="785" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="475" y="775" font-size="10" fill="#1a6b3c">Yes</text>
+  <line x1="560" y1="705" x2="618" y2="703" stroke="#b3413a" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="580" y="697" font-size="10" fill="#b3413a">No</text>
+  <path d="M720,735 L720,807 L575,807" fill="none" stroke="#b3413a" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="450" y1="845" x2="450" y2="875" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <path d="M330,905 L120,905 L120,277 L295,277" fill="none" stroke="#1a3c34" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="130" y="600" font-size="10" fill="#1a3c34" transform="rotate(-90 130,600)">loop</text>
+
+  <rect x="40" y="960" width="820" height="100" rx="8" fill="#fbfbfb" stroke="#cccccc" stroke-width="1"/>
+  <text x="60" y="983" font-size="11.5" font-weight="bold" fill="#1a3c34">What's deliberately NOT here (moved to the backend):</text>
+  <text x="60" y="1003" font-size="10.5" fill="#333">No NTP time sync — days-since-sowing is computed server-side from a configured sowing date, removing an entire class of clock-related bugs.</text>
+  <text x="60" y="1021" font-size="10.5" fill="#333">No days_since_sowing field sent — the ESP32 reports raw sensor data only; all agronomic interpretation happens in the backend's rule engine.</text>
+  <text x="60" y="1039" font-size="10.5" fill="#333">No "keep last reading cached" logic — a failed send is simply logged; the next cycle's fresh reading is what gets retried.</text>
+</svg>

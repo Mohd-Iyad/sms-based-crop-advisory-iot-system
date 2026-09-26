@@ -1,0 +1,110 @@
+<svg viewBox="0 0 1100 780" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1100" height="780" fill="#ffffff"/>
+  <text x="550" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3c34">
+    Wiring Diagram v3 — ESP32 DevKit to Actual Hardware
+  </text>
+  <text x="550" y="52" text-anchor="middle" font-size="11.5" fill="#666">
+    Red = 3.3V power   Black = GND   Blue = signal/data   (all four modules are the sensors you actually have)
+  </text>
+
+  <rect x="420" y="270" width="260" height="330" rx="12" fill="#2b2b2b" stroke="#000" stroke-width="2"/>
+  <text x="550" y="300" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">ESP32-WROOM-32</text>
+  <text x="550" y="318" text-anchor="middle" font-size="10" fill="#ccc">DevKit</text>
+  <rect x="480" y="330" width="140" height="55" fill="#444" stroke="#888"/>
+  <text x="550" y="362" text-anchor="middle" font-size="10" fill="#ccc">Micro-USB</text>
+
+  <circle cx="420" cy="430" r="4" fill="#e74c3c"/>
+  <text x="405" y="434" text-anchor="end" font-size="11" fill="#1a3c34">3V3</text>
+  <circle cx="420" cy="460" r="4" fill="#222"/>
+  <text x="405" y="464" text-anchor="end" font-size="11" fill="#1a3c34">GND</text>
+  <circle cx="420" cy="490" r="4" fill="#2980ff"/>
+  <text x="405" y="494" text-anchor="end" font-size="11" fill="#1a3c34">GPIO4</text>
+  <circle cx="420" cy="520" r="4" fill="#2980ff"/>
+  <text x="405" y="524" text-anchor="end" font-size="11" fill="#1a3c34">GPIO34 (ADC)</text>
+  <circle cx="420" cy="550" r="4" fill="#2980ff"/>
+  <text x="405" y="554" text-anchor="end" font-size="11" fill="#1a3c34">GPIO35 (ADC)</text>
+  <circle cx="420" cy="580" r="4" fill="#2980ff"/>
+  <text x="405" y="584" text-anchor="end" font-size="11" fill="#1a3c34">GPIO32 (ADC)</text>
+
+  <!-- DHT22 -->
+  <rect x="50" y="100" width="190" height="95" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="145" y="124" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a3c34">DHT22</text>
+  <text x="145" y="142" text-anchor="middle" font-size="10" fill="#333">Temp / Humidity</text>
+  <text x="145" y="159" text-anchor="middle" font-size="9.5" fill="#555">VCC · GND · DATA</text>
+  <text x="145" y="175" text-anchor="middle" font-size="9" fill="#888">(add 10k pull-up: DATA to VCC</text>
+  <text x="145" y="188" text-anchor="middle" font-size="9" fill="#888">if module has no built-in one)</text>
+
+  <!-- FC-28 -->
+  <rect x="50" y="230" width="190" height="105" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="145" y="254" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a3c34">FC-28 Soil Moisture</text>
+  <text x="145" y="271" text-anchor="middle" font-size="10" fill="#333">Probe + LM393 comparator board</text>
+  <text x="145" y="288" text-anchor="middle" font-size="9.5" fill="#555">board: VCC · GND · A0 (use A0)</text>
+  <text x="145" y="304" text-anchor="middle" font-size="9" fill="#888">probe → 2-pin header on board</text>
+  <text x="145" y="318" text-anchor="middle" font-size="9" fill="#c98a3e">two-prong probe corrodes over time</text>
+
+  <!-- MH-RD -->
+  <rect x="50" y="360" width="190" height="105" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="145" y="384" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a3c34">MH-RD Rain Plate</text>
+  <text x="145" y="401" text-anchor="middle" font-size="10" fill="#333">Plate + LM393 comparator board</text>
+  <text x="145" y="418" text-anchor="middle" font-size="9.5" fill="#555">board: VCC · GND · A0 (use A0)</text>
+  <text x="145" y="434" text-anchor="middle" font-size="9" fill="#888">plate → 2-pin header on board</text>
+  <text x="145" y="450" text-anchor="middle" font-size="9" fill="#888">(now actually transmitted to backend)</text>
+
+  <!-- LDR -->
+  <rect x="50" y="490" width="190" height="105" rx="8" fill="#eef5f3" stroke="#1a3c34" stroke-width="1.5"/>
+  <text x="145" y="514" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a3c34">LM393 LDR Module</text>
+  <text x="145" y="531" text-anchor="middle" font-size="10" fill="#333">Ambient light sensor</text>
+  <text x="145" y="548" text-anchor="middle" font-size="9.5" fill="#555">VCC · GND · A0 (4-pin: DO,A0,GND,VCC)</text>
+  <text x="145" y="564" text-anchor="middle" font-size="9" fill="#888">informational only —</text>
+  <text x="145" y="578" text-anchor="middle" font-size="9" fill="#888">never gates an alert, never sent to the LLM</text>
+
+  <!-- Power source -->
+  <rect x="850" y="370" width="190" height="110" rx="8" fill="#fdf3ea" stroke="#c98a3e" stroke-width="1.5"/>
+  <text x="945" y="395" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#7a4a10">Power Source</text>
+  <text x="945" y="415" text-anchor="middle" font-size="10" fill="#7a4a10">One-week prototype: USB 5V</text>
+  <text x="945" y="433" text-anchor="middle" font-size="10" fill="#7a4a10">(laptop or wall adapter)</text>
+  <text x="945" y="455" text-anchor="middle" font-size="9.5" fill="#a06424">Solar + battery = future work,</text>
+  <text x="945" y="469" text-anchor="middle" font-size="9.5" fill="#a06424">not attempted this week</text>
+
+  <!-- Wires -->
+  <path d="M240,132 L420,430" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+  <path d="M240,148 L420,460" fill="none" stroke="#222" stroke-width="1.5"/>
+  <path d="M240,165 L420,490" fill="none" stroke="#2980ff" stroke-width="1.8"/>
+
+  <path d="M240,262 L420,430" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+  <path d="M240,278 L420,460" fill="none" stroke="#222" stroke-width="1.5"/>
+  <path d="M240,294 L420,520" fill="none" stroke="#2980ff" stroke-width="1.8"/>
+
+  <path d="M240,392 L420,430" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+  <path d="M240,408 L420,460" fill="none" stroke="#222" stroke-width="1.5"/>
+  <path d="M240,424 L420,550" fill="none" stroke="#2980ff" stroke-width="1.8"/>
+
+  <path d="M240,522 L420,430" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+  <path d="M240,538 L420,460" fill="none" stroke="#222" stroke-width="1.5"/>
+  <path d="M240,554 L420,580" fill="none" stroke="#2980ff" stroke-width="1.8"/>
+
+  <path d="M850,425 L700,425" fill="none" stroke="#c98a3e" stroke-width="2.5"/>
+  <text x="775" y="418" text-anchor="middle" font-size="10" fill="#7a4a10">5V / VIN</text>
+
+  <!-- Pin summary -->
+  <rect x="850" y="100" width="200" height="230" rx="8" fill="#fbfbfb" stroke="#cccccc" stroke-width="1"/>
+  <text x="870" y="125" font-size="12" font-weight="bold" fill="#1a3c34">Pin Assignment Summary</text>
+  <text x="870" y="150" font-size="10.5" fill="#333">DHT22 DATA → GPIO4</text>
+  <text x="870" y="170" font-size="10.5" fill="#333">FC-28 A0 → GPIO34 (ADC)</text>
+  <text x="870" y="190" font-size="10.5" fill="#333">MH-RD A0 → GPIO35 (ADC)</text>
+  <text x="870" y="210" font-size="10.5" fill="#333">LDR A0 → GPIO32 (ADC)</text>
+  <text x="870" y="230" font-size="10.5" fill="#333">All sensor VCC → 3V3</text>
+  <text x="870" y="250" font-size="10.5" fill="#333">All GND → common GND</text>
+  <text x="870" y="270" font-size="9.5" fill="#888">D0 pins on each comparator</text>
+  <text x="870" y="285" font-size="9.5" fill="#888">board are unused — only A0</text>
+  <text x="870" y="300" font-size="9.5" fill="#888">is wired (matches config.example.h)</text>
+
+  <rect x="40" y="680" width="1020" height="80" rx="8" fill="#fbfbfb" stroke="#cccccc" stroke-width="1"/>
+  <text x="60" y="703" font-size="11.5" font-weight="bold" fill="#1a3c34">Note on the comparator boards (FC-28, MH-RD, LDR):</text>
+  <text x="60" y="723" font-size="10.5" fill="#333">
+    Each of these three sensors ships as a probe/plate/photoresistor PLUS a small LM393-based blue board with 4 pins (VCC, GND, D0, A0).
+  </text>
+  <text x="60" y="741" font-size="10.5" fill="#333">
+    Only A0 (the raw analog reading) is used here — D0 is a fixed-threshold digital trigger set by an onboard potentiometer, which this project doesn't use.
+  </text>
+</svg>

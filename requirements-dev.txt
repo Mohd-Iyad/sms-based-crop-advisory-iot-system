@@ -1,0 +1,8 @@
+# Everything needed to run the test suite (pytest tests/ -v).
+# Deployment (Render) only needs requirements.txt.
+-r requirements.txt
+pytest>=8.0.0
+# Starlette's TestClient (used by FastAPI's test client) needs an HTTP client library.
+# Newer Starlette releases require httpx2; older ones used httpx. Installing both is harmless.
+httpx2
+httpx>=0.27.0
